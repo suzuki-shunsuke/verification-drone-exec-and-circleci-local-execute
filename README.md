@@ -16,6 +16,16 @@ verification code of `drone exec` and `circleci local execute`.
 `drone exec` command may change host files.
 
 ```
+$ cat .drone.yml
+---
+kind: pipeline
+name: default
+steps:
+- name: create file
+  image: busybox
+  commands:
+  - echo foo > foo.txt
+
 $ ls
 README.md
 
@@ -32,6 +42,19 @@ README.md  foo.txt
 On the other hand, `circleci local execute` command doesn't change host files.
 
 ```
+$ cat .circleci/config.yml
+---
+version: 2
+jobs:
+  build:
+    docker:
+    - image: busybox
+    steps:
+    - run: echo foo > foo.txt
+
+$ ls
+README.md
+
 $ circleci version
 0.1.1973+68f6a97
 
