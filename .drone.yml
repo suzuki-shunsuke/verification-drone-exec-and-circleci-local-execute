@@ -1,0 +1,8 @@
+---
+kind: pipeline
+name: default
+steps:
+- name: create file
+  image: busybox
+  commands:
+  - echo foo > foo.txt
